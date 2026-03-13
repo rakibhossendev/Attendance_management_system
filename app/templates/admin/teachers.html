@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex">
+
+<!-- Sidebar -->
+<div class="bg-white border-end sidebar">
+
+<div class="sidebar-heading text-center py-4 fw-bold">
+AMS Admin
+</div>
+
+<div class="list-group list-group-flush">
+
+<a href="/" class="list-group-item list-group-item-action">
+Dashboard
+</a>
+
+<a href="/admin/teachers" class="list-group-item list-group-item-action active">
+Teachers
+</a>
+
+</div>
+
+</div>
+
+<!-- Content -->
+<div class="container-fluid p-4">
+
+<div class="d-flex justify-content-between mb-3">
+
+<h3>Teachers</h3>
+
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
+Add Teacher
+</button>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-light">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>1</td>
+<td>Demo Teacher</td>
+<td>teacher@mail.com</td>
+<td>01700000000</td>
+<td>
+<button class="btn btn-sm btn-warning">Edit</button>
+<button class="btn btn-sm btn-danger">Delete</button>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Add Teacher Modal -->
+
+<div class="modal fade" id="addTeacherModal">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+<h5>Add Teacher</h5>
+</div>
+
+<div class="modal-body">
+
+<form>
+
+<div class="mb-2">
+<label>Name</label>
+<input type="text" class="form-control">
+</div>
+
+<div class="mb-2">
+<label>Email</label>
+<input type="email" class="form-control">
+</div>
+
+<div class="mb-2">
+<label>Mobile</label>
+<input type="text" class="form-control">
+</div>
+
+<div class="mb-2">
+<label>Username</label>
+<input type="text" class="form-control">
+</div>
+
+<div class="mb-2">
+<label>Password</label>
+<input type="password" class="form-control">
+</div>
+
+<button class="btn btn-success w-100 mt-2">
+Save Teacher
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

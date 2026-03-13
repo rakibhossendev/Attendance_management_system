@@ -1,0 +1,194 @@
+Attendence_Management_System/
+run.py
+requirments.txt
+README.md
+config.py
+and other files
+app/
+    __init__.py
+    models.py
+    routes/
+        login/
+            // Teacher,admin and students search route here
+            login.py -> here teacher and admin login route
+            seacrch.py -> here students search route
+        dashborad/
+              // all dashboard here
+              admin_dashboard.py
+              teacher_dashboard.py
+              stundent_dashboard.py
+       bussines/
+              // all files here
+              attendence.py
+              semister.py
+              subjects.py
+              edits.py
+    templates/
+       base.html
+       login/
+          login.html // Teacher and adimn html code here
+       dashboard/
+          admin_dashboard.html
+          teacher_dashboard.html
+          stundent_dashboard.html
+       bussines/
+              // all files here
+              attendence.html
+              semister.html
+              subjects.html
+              edits.html
+        
+      static/
+          js/
+           // all js file here
+         css/
+           // alll css file here   
+
+     
+Attendance_Management_System/
+│
+├── run.py
+├── requirements.txt
+├── README.md
+├── config.py
+│
+└── app/
+    │
+    ├── __init__.py
+    ├── models.py
+    ├── extensions.py
+    │
+    ├── routes/
+    │   │
+    │   ├── auth/
+    │   │     login.py        # admin & teacher login
+    │   │
+    │   ├── admin/
+    │   │     dashboard.py
+    │   │     teachers.py
+    │   │     semester.py
+    │   │
+    │   ├── teacher/
+    │   │     dashboard.py
+    │   │     attendance.py
+    │   │     students.py
+    │   │
+    │   ├── student/
+    │   │     search.py
+    │   │     dashboard.py
+    │
+    ├── services/
+    │      attendance_service.py
+    │      semester_service.py
+    │      subject_service.py
+    │
+    ├── templates/
+    │   │
+    │   ├── base.html
+    │   │
+    │   ├── auth/
+    │   │      login.html
+    │   │
+    │   ├── admin/
+    │   │      dashboard.html
+    │   │      teachers.html
+    │   │      semester.html
+    │   │
+    │   ├── teacher/
+    │   │      dashboard.html
+    │   │      attendance.html
+    │   │      students.html
+    │   │
+    │   ├── student/
+    │          dashboard.html
+    │          search.html
+    │
+    └── static/
+        │
+        ├── js/
+        │     attendance.js
+        │     dashboard.js
+        │     search.js
+        │
+        ├── css/
+        │     style.css
+        │
+        └── images/
+
+
+
+কোডিং শুরু করতে চায়. কিন্তু একটু ভিন্ন ভাবে।  তুমি এক একটা File এর কোড দিবা।।  আর আমি Run করে করে সাথে সাথে output দেখতে চায়.  যেমন Login page বানিয়ে সাথে সাথে Output দেখবো কেমন হয়েছে। .  Requirements install করতে হবে। Login page একটা হবে।  যেটা দিয়ে Teachers and Admin login করবে। clean uI সহ৷ white color type এর দাওৃ Responsive করবা। তারপরের টা পরে চাইতেছি     
+```Attendance_Management_System/
+│
+├── run.py
+├── requirements.txt
+├── README.md
+├── config.py
+│
+└── app/
+    │
+    ├── __init__.py
+    ├── models.py
+    ├── extensions.py
+    │
+    ├── routes/
+    │   │
+    │   ├── auth/
+    │   │     login.py        # admin & teacher login
+    │   │
+    │   ├── admin/
+    │   │     dashboard.py
+    │   │     teachers.py
+    │   │     semester.py
+    │   │
+    │   ├── teacher/
+    │   │     dashboard.py
+    │   │     attendance.py
+    │   │     students.py
+    │   │
+    │   ├── student/
+    │   │     search.py
+    │   │     dashboard.py
+    │
+    ├── services/
+    │      attendance_service.py
+    │      semester_service.py
+    │      subject_service.py
+    │
+    ├── templates/
+    │   │
+    │   ├── base.html
+    │   │
+    │   ├── auth/
+    │   │      login.html
+    │   │
+    │   ├── admin/
+    │   │      dashboard.html
+    │   │      teachers.html
+    │   │      semester.html
+    │   │
+    │   ├── teacher/
+    │   │      dashboard.html
+    │   │      attendance.html
+    │   │      students.html
+    │   │
+    │   ├── student/
+    │          dashboard.html
+    │          search.html
+    │
+    └── static/
+        │
+        ├── js/
+        │     attendance.js
+        │     dashboard.js
+        │     search.js
+        │
+        ├── css/
+        │     style.css
+        │
+        └── images/
+```
+.  
+  
+Default username : admin  
+password: admin  এটা হচ্ছে admin panel এর। Login করলে Dashboard comming soon আসবে লেখা

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-white border-end sidebar" id="sidebar-wrapper">
+
+        <div class="sidebar-heading text-center py-4 fw-bold">
+            AMS Admin
+        </div>
+
+        <div class="list-group list-group-flush">
+
+            <a href="#" class="list-group-item list-group-item-action">
+                Dashboard
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                Teachers
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                Subjects
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                Semester
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-light bg-white border-bottom px-3">
+
+            <button class="btn btn-outline-secondary" id="menu-toggle">
+                ☰
+            </button>
+
+            <span class="ms-auto fw-semibold">Admin Panel</span>
+
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="container-fluid mt-4">
+
+            <h3 class="mb-4">Admin Dashboard</h3>
+
+            <div class="row g-3">
+
+                <div class="col-md-4 col-12">
+                    <div class="card dashboard-card shadow-sm">
+                        <div class="card-body">
+                            <h6>Total Teachers</h6>
+                            <h3>0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="card dashboard-card shadow-sm">
+                        <div class="card-body">
+                            <h6>Total Students</h6>
+                            <h3>0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="card dashboard-card shadow-sm">
+                        <div class="card-body">
+                            <h6>Total Subjects</h6>
+                            <h3>0</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="alert alert-info mt-4">
+                Dashboard features coming soon...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+{% endblock %}
