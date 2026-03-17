@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Welcome, {{ teacher.name }}</h2>
+
+    <div class="row text-center">
+        <div class="col-md-4 mb-3">
+            <a href="#" class="btn btn-primary w-100">Take Attendance</a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="#" class="btn btn-success w-100">Add Students</a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="#" class="btn btn-info w-100">View Students</a>
+        </div>
+    </div>
+
+    <p class="text-center mt-4">Dashboard features coming soon...</p>
+</div>
+{% endblock %}

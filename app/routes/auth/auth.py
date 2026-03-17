@@ -1,29 +1,43 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from app.models import Admin
+from flask import Blueprint, render_template, request, redirect, url_for, session
+from werkzeug.security import check_password_hash
+
+from app.models import Teacher
 from app.extensions import db
-from werkzeug.security import generate_password_hash, check_password_hash
 
 auth_bp = Blueprint("auth", __name__)
 
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "admin"
+
+
 @auth_bp.route("/", methods=["GET", "POST"])
 def login():
-
-    admin = Admin.query.filter_by(username="admin").first()
-
-    if not admin:
-        new_admin = Admin(username="admin")
-        new_admin.password = generate_password_hash("admin")
-        db.session.add(new_admin)
-        db.session.commit()
 
     if request.method == "POST":
 
         username = request.form.get("username")
         password = request.form.get("password")
 
-        admin = Admin.query.filter_by(username=username).first()
+        # Admin login
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
 
-        if admin and check_password_hash(admin.password, password):
-            return render_template("admin/dashboard.html")
+            session["role"] = "admin"
+            return redirect(url_for("admin_dashboard.admin_dashboard"))
+
+        # Teacher login
+        teacher = Teacher.query.filter_by(username=username).first()
+
+        if teacher and teacher.check_password(password):
+
+            session["role"] = "teacher"
+            session["teacher_id"] = teacher.id
+
+            return redirect(url_for("teacher_dashboard.teacher_dashboard"))
+
+        return render_template(
+            "auth/login.html",
+            error="Invalid username or password"
+        )
 
     return render_template("auth/login.html")
