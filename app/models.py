@@ -1,7 +1,6 @@
 from .extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
@@ -10,8 +9,6 @@ class Admin(db.Model):
         self.password = generate_password_hash(password)
     def check_password(self, password):
         return check_password_hash(self.password, password)
-
-
 
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,3 +37,16 @@ class Student(db.Model):
     roll = db.Column(db.String(50), nullable=False)
     department = db.Column(db.String(50), nullable=False)
     semester = db.Column(db.String(50), nullable=False)    
+    
+
+class Attendance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'))
+    date = db.Column(db.String(20))
+    period = db.Column(db.String(10))  # Period number or name
+    subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'))
+    status = db.Column(db.String(10))  # Present / Absent
+    student = db.relationship("Student", backref="attendance")
+    subject = db.relationship("Subject", backref="attendance")
+    
+    

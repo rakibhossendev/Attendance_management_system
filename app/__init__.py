@@ -16,12 +16,16 @@ def create_app():
     app.register_blueprint(teacher_bp)
     from app.routes.admin.subjects import subject_bp
     app.register_blueprint(subject_bp)
+    from app.routes.admin.dashboard import admin_dashboard_bp   
+    app.register_blueprint(admin_dashboard_bp)                 
 
     # Teacher Dashboard
     from app.routes.teacher.dashboard import teacher_dashboard_bp
     app.register_blueprint(teacher_dashboard_bp)
     from app.routes.teacher.students import teacher_students_bp
     app.register_blueprint(teacher_students_bp)
+    from app.routes.teacher.attendance import teacher_attendance_bp
+    app.register_blueprint(teacher_attendance_bp)
     
     with app.app_context():
         db.create_all()

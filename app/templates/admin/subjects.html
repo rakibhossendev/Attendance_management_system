@@ -1,229 +1,144 @@
-{% extends "base.html" %}
+{% extends "admin_base.html" %}
 
-{% block content %}
+{% block admin_content %}
 
 <div class="container mt-4">
 
-<h3>Subjects Assign</h3>
+    <h3>Subjects Assign</h3>
 
-<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubject">
-Add Subject
-</button>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubject">
+        Add Subject
+    </button>
 
-<table class="table table-bordered">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-<thead>
-
-<tr>
-<th>ID</th>
-<th>Subject</th>
-<th>Semester</th>
-<th>Department</th>
-<th>Teacher</th>
-<th>Action</th>  
-</tr>
-
-</thead>
-
-<tbody>
-
-{% for subject in subjects %}
-
-<tr>
-
-<td>{{ subject.id }}</td>
-<td>{{ subject.name }}</td>
-<td>{{ subject.semester }}</td>
-<td>{{ subject.department }}</td>
-<td>{{ subject.teacher.name }}</td>
-
-<td>
-
-<button 
-class="btn btn-sm btn-warning"
-data-bs-toggle="modal"
-data-bs-target="#editSubject{{ subject.id }}">
-Edit
-</button>
-
-<form method="POST" action="/admin/delete-subject/{{ subject.id }}" style="display:inline;">
-<button 
-class="btn btn-sm btn-danger"
-onclick="return confirm('Delete this subject?')">
-Delete
-</button>
-</form>
-
-</td>
-
-</tr>
-
-{% endfor %}
-  
-{% for subject in subjects %}
-
-<div class="modal fade" id="editSubject{{ subject.id }}">
-
-<div class="modal-dialog">
-
-<div class="modal-content">
-
-<div class="modal-header">
-<h5>Edit Subject</h5>
-</div>
-
-<div class="modal-body">
-
-<form method="POST" action="/admin/update-subject/{{ subject.id }}">
-
-<div class="mb-2">
-<label>Subject</label>
-<input 
-type="text" 
-name="name" 
-class="form-control"
-value="{{ subject.name }}">
-</div>
-
-<div class="mb-2">
-<label>Semester</label>
-<input 
-type="text" 
-name="semester"
-class="form-control"
-value="{{ subject.semester }}">
-</div>
-
-<div class="mb-2">
-<label>Department</label>
-<input 
-type="text"
-name="department"
-class="form-control"
-value="{{ subject.department }}">
-</div>
-
-<div class="mb-2">
-<label>Teacher</label>
-
-<select name="teacher_id" class="form-control">
-
-{% for teacher in teachers %}
-
-<option 
-value="{{ teacher.id }}"
-{% if teacher.id == subject.teacher_id %}selected{% endif %}>
-
-{{ teacher.name }}
-
-</option>
-
-{% endfor %}
-
-</select>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Semester</th>
+                    <th>Department</th>
+                    <th>Teacher</th>
+                    <th>Action</th>  
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.id }}</td>
+                    <td>{{ subject.name }}</td>
+                    <td>{{ subject.semester }}</td>
+                    <td>{{ subject.department }}</td>
+                    <td>{{ subject.teacher.name }}</td>
+                    <td>
+                        <button 
+                            class="btn btn-sm btn-warning"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editSubject{{ subject.id }}">
+                            Edit
+                        </button>
+                        <form method="POST" action="/admin/delete-subject/{{ subject.id }}" style="display:inline;">
+                            <button 
+                                class="btn btn-sm btn-danger"
+                                onclick="return confirm('Delete this subject?')">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
-<button class="btn btn-success w-100 mt-2">
-Update Subject
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-{% endfor %}  
-
-</tbody>
-
-</table>
-
-</div>
-
-
+<!-- Add Subject Modal -->
 <div class="modal fade" id="addSubject">
-
-<div class="modal-dialog">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h5>Add Subject</h5>
-
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Add Subject</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/add-subject">
+                    <div class="mb-2">
+                        <label>Subject</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Semester</label>
+                        <input type="text" name="semester" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Department</label>
+                        <input type="text" name="department" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Teacher</label>
+                        <select name="teacher_id" class="form-control" required>
+                            {% for teacher in teachers %}
+                                <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-success w-100 mt-2">Assign Subject</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="modal-body">
-
-<form method="POST" action="/admin/add-subject">
-
-<div class="mb-2">
-
-<label>Subject</label>
-
-<input type="text" name="name" class="form-control">
-
+<!-- Edit Subject Modals -->
+{% for subject in subjects %}
+<div class="modal fade" id="editSubject{{ subject.id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edit Subject</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/update-subject/{{ subject.id }}">
+                    <div class="mb-2">
+                        <label>Subject</label>
+                        <input type="text" name="name" class="form-control" value="{{ subject.name }}" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Semester</label>
+                        <input type="text" name="semester" class="form-control" value="{{ subject.semester }}" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Department</label>
+                        <input type="text" name="department" class="form-control" value="{{ subject.department }}" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Teacher</label>
+                        <select name="teacher_id" class="form-control" required>
+                            {% for teacher in teachers %}
+                                <option value="{{ teacher.id }}" {% if teacher.id == subject.teacher_id %}selected{% endif %}>
+                                    {{ teacher.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-success w-100 mt-2">Update Subject</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-<div class="mb-2">
-
-<label>Semester</label>
-
-<input type="text" name="semester" class="form-control">
-
-</div>
-
-
-<div class="mb-2">
-
-<label>Department</label>
-
-<input type="text" name="department" class="form-control">
-
-</div>
-
-
-<div class="mb-2">
-
-<label>Teacher</label>
-
-<select name="teacher_id" class="form-control">
-
-{% for teacher in teachers %}
-
-<option value="{{ teacher.id }}">
-{{ teacher.name }}
-</option>
-
 {% endfor %}
-
-  
-</select>
-
-</div>
-
-
-<button class="btn btn-success w-100">
-
-Assign Subject
-
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
 
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-white border-end sidebar" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 fw-bold">
+            AMS Admin
+        </div>
+        <div class="list-group list-group-flush">
+            <a href="{{ url_for('admin_dashboard.admin_dashboard') }}" class="list-group-item list-group-item-action {% if active_page=='dashboard' %}active{% endif %}">
+                Dashboard
+            </a>
+            <a href="{{ url_for('teacher_admin.teachers') }}" class="list-group-item list-group-item-action {% if active_page=='teachers' %}active{% endif %}">
+                Teachers
+            </a>
+            <a href="{{ url_for('subject_admin.subjects') }}" class="list-group-item list-group-item-action {% if active_page=='subjects' %}active{% endif %}">
+                Subjects
+            </a>
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger btn-sm">Logout</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-light bg-white border-bottom px-3">
+            <button class="btn btn-outline-secondary" id="menu-toggle">☰</button>
+            <span class="ms-auto fw-semibold">Admin Panel</span>
+        </nav>
+
+        <!-- Page Specific Content -->
+        <div class="container-fluid mt-4">
+            {% block admin_content %}{% endblock %}
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/teacher.js') }}"></script>
+
+{% endblock %}

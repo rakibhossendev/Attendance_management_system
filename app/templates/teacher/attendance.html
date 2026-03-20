@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Take Attendance</h2>
+
+    <!-- Filter form -->
+    <form method="POST" class="row g-3 mb-4">
+        <div class="col-md-3">
+            <input type="text" name="department" placeholder="Department" class="form-control" required>
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="semester" placeholder="Semester" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+            <input type="date" name="date" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+            <select name="period" class="form-control" required>
+                <option value="">Select Period</option>
+                <option value="1">Period 1</option>
+                <option value="2">Period 2</option>
+                <option value="3">Period 3</option>
+                <option value="4">Period 4</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select name="subject_id" class="form-control" required>
+                <option value="">Select Subject</option>
+                {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-primary w-100">Load Students</button>
+        </div>
+    </form>
+
+    <!-- Attendance Table -->
+    {% if students %}
+    <form method="POST" action="{{ url_for('teacher_attendance.save_attendance') }}">
+        <input type="hidden" name="date" value="{{ request.form.date }}">
+        <input type="hidden" name="period" value="{{ request.form.period }}">
+        <input type="hidden" name="subject_id" value="{{ request.form.subject_id }}">
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Roll</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.roll }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>
+                        <select name="status_{{ student.id }}" class="form-control">
+                            <option value="Absent" selected>Absent</option>
+                            <option value="Present">Present</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button class="btn btn-success w-100">Save Attendance</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
